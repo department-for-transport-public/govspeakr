@@ -7,7 +7,7 @@
 add_image(file_name, folder = "graphs")
 }
 \arguments{
-\item{file_name}{string giving the file name of the image only}
+\item{file_name}{string giving the file name of the image (either png or svg)}
 
 \item{folder}{string giving the directory the image is stored in,
 defaults to "graphs".}
