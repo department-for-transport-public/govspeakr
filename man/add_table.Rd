@@ -22,7 +22,7 @@ Add a table in Rmarkdown suitable for publication in govspeak and in word/PDF
 add_table(mtcars)
 ##Example with comma formatted values
 add_table(datasets::EuStockMarkets)
-#' ##Example with format.args set to null
+##Example with format.args set to null
 add_table(datasets::EuStockMarkets, format.args = NULL)
 
 }
