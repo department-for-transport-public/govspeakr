@@ -31,6 +31,8 @@ This should be done for the pre-release only,
 and not for the final statistics publication
 }
 \examples{
+\dontrun{
 add_blue_header("Annual Road Traffic Statistics", stats_status = "Official Statistics")
+}
 
 }
