@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_image.R
 \name{add_image}
 \alias{add_image}
-\title{Highlight in bold key words in summary text}
+\title{Convert an image file name into a html path}
 \usage{
 add_image(file_name, folder = "graphs")
 }
@@ -12,9 +12,22 @@ add_image(file_name, folder = "graphs")
 \item{folder}{string giving the directory the image is stored in,
 defaults to "graphs".}
 }
+\value{
+A plain text string which embeds the specified image into any output format
+}
 \description{
 Add images which are not auto-generated during the knitting process
 to all publishing formats.
 Images can now be saved in any format compatible with Whitehall Publisher
 (png or svg), and with any meaningful file name.
+}
+\examples{
+\dontrun{
+##Image in default folder (graphs)
+add_image("rail_usage_infographic.svg")
+
+##Image in different folder
+add_image("rail_usage_infographic.svg", folder = "img")
+}
+
 }
