@@ -18,18 +18,20 @@ test_that("add_blue_header generates correct HTML structure", {
       result
     )
   )
-  # expect_true(
-  #   grepl(
-  #     "<h1>\\s*<span style='color: white; font-family: Arial;font-size: 50px; font-weight: bold;'>Test Header</span>\\s*</h1>",
-  #     result
-  #   )
-  # )
-  # expect_true(
-  #   grepl(
-  #     "<h3>\\s*<span style='color: white; font-family: Arial; font-weight: bold;'>Pre-release</span>\\s*</h3>",
-  #     result
-  #   )
-  # )
+
+  expect_true(
+    grepl(
+      "<span style='color: white; font-family: Arial;font-size: 50px; font-weight: bold;'>\nTest Header\n</span>",
+      result
+    )
+  )
+
+  expect_true(
+    grepl(
+      "<span style='color: white; font-family: Arial; font-weight: bold;'>\nPre-release\n</span>",
+      result
+    )
+  )
 
   # Test with custom inputs
   result_custom <- add_blue_header(
@@ -40,24 +42,24 @@ test_that("add_blue_header generates correct HTML structure", {
 
   expect_true(
     grepl(
-      "Custom Header</span>",
-      result_custom,
-      fixed = TRUE
-
+      "<span style='color: white; font-family: Arial; font-weight: normal;'>\nCustom Statistics\n</span>",
+      result_custom
     )
   )
-  # expect_true(
-  #   grepl(
-  #     "<h1>\\s*<span style='color: white; font-family: Arial;font-size: 50px; font-weight: bold;'>Custom Header</span>\\s*</h1>",
-  #     result_custom
-  #   )
-  # )
-  # expect_true(
-  #   grepl(
-  #     "<h3>\\s*<span style='color: white; font-family: Arial; font-weight: bold;'>Custom Pre-release</span>\\s*</h3>",
-  #     result_custom
-  #   )
-  # )
+
+  expect_true(
+    grepl(
+      "<span style='color: white; font-family: Arial;font-size: 50px; font-weight: bold;'>\nCustom Header\n</span>",
+      result_custom
+    )
+  )
+
+  expect_true(
+    grepl(
+      "<span style='color: white; font-family: Arial; font-weight: bold;'>\nCustom Pre-release\n</span>",
+      result_custom
+    )
+  )
 
   })
 
