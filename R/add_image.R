@@ -2,7 +2,7 @@
 #' to all publishing formats.
 #' Images can now be saved in any format compatible with Whitehall Publisher
 #' (png or svg), and with any meaningful file name.
-#' @param file_name string giving the file name of the image only
+#' @param file_name string giving the file name of the image (either png or svg)
 #' @param folder string giving the directory the image is stored in,
 #' defaults to "graphs".
 #' @export
@@ -20,5 +20,17 @@
 #' }
 #'
 add_image <- function(file_name, folder = "graphs") {
+
+  #Stop if image is not a png/svg
+  if(!grepl("[.](svg|png)$", file_name, ignore.case = TRUE)){
+    stop("Image must be svg or png format")
+  }
+
+  #Stop if folder name is provided as part of name
+  if(grepl("\\/", file_name)){
+    stop("Please only provide the file name to the first argument.
+         The folder location should be specified as the second argument if required")
+  }
+
   knitr::asis_output(paste0("![](", folder, "/", file_name, ")<!-- -->"))
 }
