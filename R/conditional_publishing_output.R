@@ -6,6 +6,7 @@
 #' "docx" for word_document, and "latex" for pdf_document.
 #' @param output object to display in the document; can be a table, text,
 #' graph, or image.
+#' @importFrom knitr opts_knit
 #' @export
 #' @name conditional_publishing_output
 #' @title Conditional display of object depending on Rmarkdown publication type.
