@@ -9,7 +9,7 @@
 #' @name callout_box
 #' @title Include a callout box in govspeak output
 callout_box <- function(text, format = "html") {
-  if (opts_knit$get("rmarkdown.pandoc.to") %in% format) {
+  if (knitr::opts_knit$get("rmarkdown.pandoc.to") %in% format) {
 
       knitr::asis_output(paste("$CTA", text, "$CTA", sep = "\n"))
 
