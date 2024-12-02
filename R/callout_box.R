@@ -3,7 +3,9 @@
 #' and as simple text only in other formats.
 #' @param text string to publish in a callout box
 #' @param format string which identifies the outputs you would like the
-#' callout box tags to appear in. Set to HTML as default. If this is not
+#' callout box tags to appear in. Set to HTML as default. If HTML is not the chosen format value,
+#' the callout box will be displayed as a CSS-formatted in the HTML output. All other
+#' formats which are not the chosen format value will display the callout box as simple text.
 #' @importFrom knitr opts_knit asis_output
 #' @export
 #' @name callout_box
