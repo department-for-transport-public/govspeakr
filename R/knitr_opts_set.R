@@ -1,7 +1,8 @@
 #' Set parameters necessary for publishing on Whitehall.
-#' Includes setting specific figure height and width and
-#' suppressing warning messages
+#' Includes setting specific figure parameters and
+#' suppressing warnings, messages and other outputs
 #' @export
+#' @importFrom knitr opts_chunk
 #' @name knitr_opts_set
 #' @param fig.path folder to save generated images to. Defaults to "graphs"
 #' @title Set knitr parameters to allow publishing on Whitehall
@@ -17,6 +18,6 @@ knitr_opts_set <- function(fig.path = "graphs/") {
   # The default path for mojspeakr::convert_rmd() to check for images
   #is ./graphs
     fig.path = fig.path,
-  dev = "svg"
+    dev = "svg"
   )
 }
