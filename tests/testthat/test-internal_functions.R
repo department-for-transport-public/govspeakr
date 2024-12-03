@@ -74,6 +74,7 @@ test_that("remove_header message and warning works as expected", {
   title: This is a test title
   output: html_document
   ---
+
   ---
   title: This is a test title
   output: html_document
@@ -81,8 +82,7 @@ test_that("remove_header message and warning works as expected", {
   "
 
   expect_warning(remove_header(text),
-                 "Removed 2 header blocks.
-             Please check output for potentially missing strings")
+                 "Removed 2 header blocks")
 
 })
 
@@ -91,21 +91,62 @@ test_that("remove_header message and warning works as expected", {
 test_that("remove_rmd_blocks removes multiline code blocks from a markdown file", {
 
   #Create a test string
-  text <- "This is a test markdown file.
-
-  ```r
-  x <- 1
-  y <- 2
-  z <- 3
+  text <- "``` r
+  summary(cars)
   ```
-
-  This is some more text.
   "
 
   expect_equal(remove_rmd_blocks(text),
-               "This is a test markdown file.
+               "  ")
 
-  This is some more text.
-  ")
+  #Create a test string
+  text <- "```
+  summary(cars)
+  ```
+  "
+
+  expect_equal(remove_rmd_blocks(text),
+               "  ")
+
+})
+
+test_that("remove_rmd_blocks does not alter a markdown file without multiline code blocks", {
+
+  #Create a test string
+  text <- "This is a test markdown file. It has ```"
+
+  expect_equal(remove_rmd_blocks(text),
+               "This is a test markdown file. It has ```")
+
+  #Create a test string
+  text <- "This is a test markdown file. It has ``` r"
+
+  expect_equal(remove_rmd_blocks(text),
+               "This is a test markdown file. It has ``` r")
+
+})
+
+test_that("remove_rmd_blocks message works as expected", {
+
+  #Create a test string
+  text <- "``` r
+  summary(cars)
+  ```
+  "
+
+  expect_message(remove_rmd_blocks(text),
+                 "Removed code blocks; consider setting echo = FALSE for all code chunks")
+
+  #Create a test string
+  text <- "``` r
+  summary(cars)
+  ```
+  ``` r
+  ggplot(mtcars)
+  ```
+  "
+
+  expect_message(remove_rmd_blocks(text),
+                 "Removed code blocks; consider setting echo = FALSE for all code chunks")
 
 })

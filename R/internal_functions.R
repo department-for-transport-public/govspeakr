@@ -43,7 +43,10 @@ convert_callouts <- function(md_file) {
 remove_header <- function(md_file) {
 
   ##Message to let people know how many header blocks removed
-  number_removed <- length(grep("---\\n\\s*.*?\\s*output\\s*.*?\\s*---\\n", md_file))
+  number_removed <- gregexpr("---\\n\\s*.*?\\s*output\\s*.*?\\s*---\\n", md_file)
+
+  #Count number of matches
+  number_removed <- length(number_removed[[1]])
 
   ##Message if one removed, warning if more than one removed
   if (number_removed == 1) {
@@ -72,8 +75,13 @@ remove_header <- function(md_file) {
 #'
 remove_rmd_blocks <- function(md_file) {
 
+  ##Check if there are any code block matches and return a message if so
+  if (length(grep("\`\`\`(| r)\\n.*?\`\`\`\\n", md_file)) > 0) {
+    message("Removed code blocks; consider setting echo = FALSE for all code chunks")
+  }
+
   # Lazy match on warnings and code blocks
-  gsub("```\\n.*?```\\n\\n", "", md_file)
+  gsub("```(| r)\\n.*?```\\n", "", md_file)
 
 }
 
