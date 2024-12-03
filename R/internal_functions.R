@@ -8,6 +8,10 @@ generate_image_references <- function(lines) {
   #Split any lines on <-- --> to get one image per line chaps
   lines <- unlist(strsplit(lines, "<!-- -->"))
 
+  #Return a message of how many image references detected
+  message("Detected ", length(grep("!\\[\\]\\(.*\\/(.*)\\)", lines)),
+          " image references")
+
   ##Sub out markdown format for Whitehall format
   lines <- gsub("\\!\\[\\]\\(.*\\/(.*)\\)", "[Image:\\1]", lines)
 
@@ -37,6 +41,17 @@ convert_callouts <- function(md_file) {
 #' @keywords internal
 #' @title Replace R markdown header with ## title
 remove_header <- function(md_file) {
+
+  ##Message to let people know how many header blocks removed
+  number_removed <- length(grep("---\\n\\s*.*?\\s*output\\s*.*?\\s*---\\n", md_file))
+
+  ##Message if one removed, warning if more than one removed
+  if (number_removed == 1) {
+    message("Removed 1 header block")
+  } else if (number_removed > 1) {
+    warning("Removed ", number_removed, " header blocks.
+            Please check output for potentially missing strings")
+  }
 
   # Lazy match on header to extract title
   # Remove substitution if titles must be entered manually

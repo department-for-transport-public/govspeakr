@@ -66,3 +66,19 @@ test_that("Works with multiple line breaks", {
   )
 
 })
+
+test_that("Message returns number of images detected", {
+  expect_message(generate_image_references("![](test_files/figure-html/pressure-1.png)"),
+                 "Detected 1 image references")
+
+  expect_message(
+    generate_image_references(
+      "![](test_files/figure-html/pressure-1.png)<!-- -->\n\n![](test_files/figure-html/pressure-2.png)"
+    ),
+    "Detected 2 image references"
+  )
+
+  expect_message(generate_image_references("This is some text"),
+                 "Detected 0 image references")
+
+})
