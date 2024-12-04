@@ -20,50 +20,9 @@ remotes::install_github("department-for-transport-public/govspeakr")
 
 ## Usage
 
-### Conversion of output to govspeak format
-
-{govspeakr} is designed to be used alongside an RMarkdown file, and cannot be called inside the RMarkdown file itself. The conversion acts on a markdown (\*.md) file only, so R markdown (\*.Rmd) should first be converted/knitted to \*.md. This can be achieved through setting the argument `keep_md` to true in the YAML header of the RMarkdown document.
-
-```
----
-title: "My Rmarkdown File"
-output: 
-  html_document:
-    keep_md: true
----
-```
-
-Dual output of govspeak and word/PDF can be achieved as follows:
-
-```
----
-title: "My Rmarkdown File"
-output: 
-  html_document:
-    keep_md: true
-  word_document:
-    #any other parameters relevant to the word document here
----
-```
-
-It is also possible to keep the md document associated with the word output, and output a HTML format alongside this:
-
-```
----
-title: "My Rmarkdown File"
-output: 
-  word_document:
-    keep_md: true
-  html_document:
-    #any other parameters relevant to the html document here
----
-```
-
-To render both outputs, make use of the `rmarkdown::render()` function with the argument `outputs = "all"`.
-
 #### convert_rmd()
 
-Following rendering of the output, the `convert_rmd()` function modifies formatting of the .md file to produce a govspeak output which can be read by Whitehall Publishing:
+Following rendering of the Rmd output, the `convert_rmd()` function modifies formatting of the .md file to produce a govspeak output which can be read by Whitehall Publishing:
 
 * Image tags are converted from standard markdown to govspeak i.e.
 ```
@@ -74,16 +33,13 @@ Figure 1
 [Image:image1.png]
 ```
 
-* Page breaks are replaced. This feature can be controlled using the "page_break" argument. ```page_break = "line"``` replaces them with a horizontal ruling, while ```page_break = "none"``` just moves the subsequent text onto a new line, and ```page_break = "unchanged"``` makes no replacement.
+* Page breaks are replaced.
 
-* YAML header is removed
+* YAML header and code chunks are removed
 
-* As GOV.UK cannot accept first-level headers (single #), all hashed headers are increased by one level i.e.
-``` # Title ``` becomes ```## Title```. This functionality can be controlled using the sub_pattern argument. Setting it to TRUE increases all headers by one level. FALSE results in no changes to the headers as written. Passing the argument a vector allows selective changing of specific headers, e.g. ```sub_pattern = c("#", "##")``` would change only first and second level headers.
+* All hashed headers are increased by one level 
 
-* Image names can be converted to a tidy standardised form of "image-X.png/svg". Passing a folder path for the image folder working directory (usually the same as the Rmarkdown working directory) converts the image names in that directory.
-
-This function should be run in a separate utility script distinct from the Rmarkdown document. It produces two outputs; a govspeak format md file called x_converted.md, where x is the name of the original .md file, and a csv called img_lookup.csv, which provides a mapping of the expected image names to markdown image tags for QA purposes.  
+For more details on how to use this function, see the [vignette](https://department-for-transport-public.github.io/govspeakr/articles/convert_rmd.html).
 
 ### Formatting of govspeak documents for publication
 
