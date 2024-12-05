@@ -91,8 +91,8 @@ For RMarkdown documents where you have multiple output formats listed in the YAM
 
 An example of how to use the `render()` function to render all output formats listed in the YAML header would look like this:
 
-```{r}
-rmarkdown::render("path/to/your/RMarkdown/file.Rmd", outputs = "all")
+```{r, eval = FALSE}
+rmarkdown::render("path/to/your/RMarkdown/file.Rmd", output_format = "all")
 ```
 
 
