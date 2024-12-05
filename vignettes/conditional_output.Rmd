@@ -20,13 +20,13 @@ library(govspeakr)
 
 ## The purpose of this function
 
-The `conditional_output` function is designed to simplify the process of creating multiple outputs from a single R Markdown document. This is useful when you want to create two different outputs which are mostly identical in content, but have a couple of minor differences in formatting or content. 
+The `conditional_publishing_output` function is designed to simplify the process of creating multiple outputs from a single R Markdown document. This is useful when you want to create two different outputs which are mostly identical in content, but have a couple of minor differences in formatting or content. 
 
 The most common use case for this is when you want to have a formatted bit of content in a document you'll be sharing with others, but this formatting is not compatible with publishing in govspeak format. For example, you may want to have a formatted header in your HTML output, but don't want this HTML formatting to appear in the version used to create your govspeak output. 
 
-## Using conditional_output
+## Using conditional_publishing_output
 
-The conditional_output function takes two arguments:
+The conditional_publishing_output function takes two arguments:
 
 * **output** - the content you want to conditionally include in your output. This can be any valid R Markdown content, such as text, code, or images.
 
@@ -36,10 +36,10 @@ The conditional_output function takes two arguments:
 * **"docx"** for Word output
 * **"latex"** for PDF output
 
-Here's an example of how you might use the `conditional_output` function in an R Markdown document:
+Here's an example of how you might use the `conditional_publishing_output` function in an R Markdown document:
 
-```{r}
-conditional_output(
+```{r, eval=FALSE}
+conditional_publishing_output(
   output = "# This is a header",
   publication_type = "html"
 )
@@ -50,12 +50,12 @@ In this example, the header will only appear in the HTML output of the document.
 You can also use multiple conditional outputs in a single chunk as an if-else type statement. This allows you to include the same content but with different formatting across two different output types. Here's an example:
 
 ```{r}
-conditional_output(
+conditional_publishing_output(
   output = "# This is a header",
   publication_type = "html"
 )
 
-conditional_output(
+conditional_publishing_output(
   output = "This is a header",
   publication_type = "docx"
 )
@@ -65,4 +65,4 @@ In this example, the header will appear as a formatted header in the HTML output
 
 ## Use within other functions
 
-This function also forms the basis of other functions in the `govspeakr` package, such as `govspeakr::add_blue_header()`. This function uses `conditional_output` to generate a blue header in HTML output, but does not show this header in other output formats. This is designed to be used in situations where you want to share your HTML content prior to release and want it to emulate the appearance of gov.uk pages. The will be added automatically by Whitehall publisher when the govspeak content is published, so it's not necessary for this to be present in your govspeak output.
+This function also forms the basis of other functions in the `govspeakr` package, such as `govspeakr::add_blue_header()`. This function uses `conditional_publishing_output` to generate a blue header in HTML output, but does not show this header in other output formats. This is designed to be used in situations where you want to share your HTML content prior to release and want it to emulate the appearance of gov.uk pages. The will be added automatically by Whitehall publisher when the govspeak content is published, so it's not necessary for this to be present in your govspeak output.
