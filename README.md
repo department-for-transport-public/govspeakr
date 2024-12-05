@@ -55,19 +55,11 @@ Formats a dataframe of data into a table. This will display correctly in govspea
 Aims to make publishing two formats from one RMarkdown document simple. This wrapper allows any output to be conditional and only appear in one of the specified formats e.g. to output table_one in the HTML output only you can use:
 
 ```
-conditional_publishing_output("html", table_one)
+conditional_publishing_output(table_one, "html")
 ```
-This output will not appear at all in any non-HTML outputs such as word or pdf.
+In this example, the output will not appear at all in any non-HTML outputs such as word or pdf.
 
-The full list of options that can be used in the first argument are:
-
-* **"html"** for HTML/govspeak output
-* **"docx"** for Word output
-* **"latex"** for PDF output
-* **"markdown_strict"** for markdown output
-* **"pptx"** for powerpoint presentation
-* **"beamer"** for beamer presentation
-* **"odt"** for odt output
+For more details on how to use this function, see the [vignette](https://department-for-transport-public.github.io/govspeakr/articles/conditional_publishing_output.html).
 
 #### callout_box() 
 Some publications use a callout box to add emphasis to text in an online publication via `$CTA` tags. This function automatically adds these `$CTA` tags to text in the govspeakr output only. If the HTML output is not used as the govspeakr output, CTA tags will appear in a grey box in HTML outputs.
