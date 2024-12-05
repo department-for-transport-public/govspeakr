@@ -11,6 +11,6 @@ knitr_opts_set(fig.path = "graphs/")
 }
 \description{
 Set parameters necessary for publishing on Whitehall.
-Includes setting specific figure height and width and
-suppressing warning messages
+Includes setting specific figure parameters and
+suppressing warnings, messages and other outputs
 }

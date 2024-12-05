@@ -1,7 +1,7 @@
-Package: mojspeakr
+Package: govspeakr
 Type: Package
-Title: Formats MoJ markdown for publication on gov.uk 
-Version: 0.5.3
+Title: Facilitates Producing Whitehall Publisher-Ready Outputs Using Rmarkdown 
+Version: 1.0.0
 Author: Francesca Bryden
 Maintainer: Francesca.Bryden <francesca.bryden@justice.gov.uk>
 Description: Allows preparation of HTML releases for publication on gov.uk
@@ -14,5 +14,7 @@ Suggests:
     rmarkdown
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.2
 Config/testthat/edition: 3
+URL: https://department-for-transport-public.github.io/mojspeakr/
+VignetteBuilder: knitr
