@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, echo = FALSE}
 library(govspeakr)
 ```
 
@@ -30,7 +30,7 @@ Additionally, if the specified format is _not_ HTML, but a HTML output is also p
 
 Examples of how this might work are shown below:
 
-```{r}
+```{r, eval = FALSE}
 ##This will display the $CTA tags in the HTML output and plain text in any other format
 callout_box("This is a callout box")
 

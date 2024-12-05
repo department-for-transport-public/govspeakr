@@ -39,7 +39,7 @@ Figure 1
 
 * All hashed headers are increased by one level 
 
-For more details on how to use this function, see the [vignette](https://department-for-transport-public.github.io/govspeakr/articles/convert_rmd.html).
+For more details on how to use this function, see the [vignette](https://department-for-transport-public.github.io/govspeakr/articles/callout_box.html).
 
 ### Formatting of govspeak documents for publication
 
@@ -59,7 +59,7 @@ conditional_publishing_output(table_one, "html")
 ```
 In this example, the output will not appear at all in any non-HTML outputs such as word or pdf.
 
-For more details on how to use this function, see the [vignette](https://department-for-transport-public.github.io/govspeakr/articles/conditional_publishing_output.html).
+For more details on how to use this function, see the [vignette](https://department-for-transport-public.github.io/govspeakr/articles/conditional_output.html).
 
 #### callout_box() 
 Some publications use a callout box to add emphasis to text in an online publication via `$CTA` tags. This function automatically adds these `$CTA` tags to text in the govspeakr output only. If the HTML output is not used as the govspeakr output, CTA tags will appear in a grey box in HTML outputs.
