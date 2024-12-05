@@ -10,6 +10,15 @@
 #' @export
 #' @name callout_box
 #' @title Include a callout box in govspeak output
+#' @examples
+#' \dontrun{
+#' ##This will display the $CTA tags in the HTML output and nothing in any other format
+#' callout_box("This is a callout box")
+#'
+#' #This will display the $CTA tags in the word output and a nicely CSS-formatted box in the HTML output
+#' callout_box("This is a callout box", "word")
+#' }
+#'
 callout_box <- function(text, format = "html") {
   if (knitr::opts_knit$get("rmarkdown.pandoc.to") %in% format) {
 

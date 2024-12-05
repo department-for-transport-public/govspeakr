@@ -1,0 +1,41 @@
+---
+title: "callout_box"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{callout_box}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(govspeakr)
+```
+
+## What are callout boxes?
+
+Callout boxes are a way to highlight important information in a document. They are often used to draw attention to key points or to provide additional context. On Whitehall publisher, callout boxes are often used to highlight key pieces of information for the user, and are indicated with `$CTA` tags before and after the text.
+
+## How to use callout boxes in govspeakr
+
+The `callout_box` function in the `govspeakr` package allows you to add callout boxes to your govspeak documents. The function takes two arguments: `text` and `format`. The `text` argument is the text you want to display in the callout box, and the `format` argument specifies the format in which you want the govspeak callout box to be displayed.
+
+Additionally, if the specified format is _not_ HTML, but a HTML output is also produced, the HTML output will include a CSS-formatted callout box which aims to replicate the visual appearance of the callout box as it appears on gov.uk. For any other formats, the callout box will be displayed as simple text.
+
+Examples of how this might work are shown below:
+
+```{r}
+##This will display the $CTA tags in the HTML output and plain text in any other format
+callout_box("This is a callout box")
+
+#This will display the $CTA tags in the word output and a nicely CSS-formatted box in the HTML output
+callout_box("This is a callout box", "word")
+
+```
+
