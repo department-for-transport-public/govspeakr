@@ -4,15 +4,15 @@
 \alias{conditional_publishing_output}
 \title{Conditional display of object depending on Rmarkdown publication type.}
 \usage{
-conditional_publishing_output(publication_type, output)
+conditional_publishing_output(output, publication_type)
 }
 \arguments{
+\item{output}{object to display in the document; can be a table, text,
+graph, or image.}
+
 \item{publication_type}{string describing type of RMarkdown output you would
 like the object to appear in. Options include "html" for html_document,
 "docx" for word_document, and "latex" for pdf_document.}
-
-\item{output}{object to display in the document; can be a table, text,
-graph, or image.}
 }
 \description{
 Conditional display of specified objects when RMarkdown document is knitted.

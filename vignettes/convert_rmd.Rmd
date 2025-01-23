@@ -1,0 +1,126 @@
+---
+title: "convert_rmd"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{convert_rmd}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo = FALSE}
+library(govspeakr)
+```
+
+## The principle behind converting RMarkdown to govspeak
+
+### What is govspeak? 
+
+Govspeak is a coding language, very similar to markdown itself, which is used to create content for gov.uk through a platform known as Whitehall publisher. If you release content in "HTML" format on gov.uk, you will actually write that content in the govspeak language, and on publishing it will be converted to HTML. For people wanting to create a govspeak output from an Rmarkdown file, the {govspeakr} package aims to make it easy to generate that output. 
+
+### How RMarkdown works
+
+It's useful to understand how RMarkdown works under the hood to help you understand how to produce govspeak outputs.
+
+RMarkdown is a file format that allows you to write text and code together. When you knit an RMarkdown file, the code is run and the output is inserted into the document. The output can be in a variety of formats, such as HTML, PDF, or Word.
+
+When you knit RMarkdown, the first thing the file does is generate intermediate content: a markdown file (.md) made up of raw markdown content, and image files for any charts, images, etc. These files are then combined to produce the final output, and the intermediate files are deleted. The markdown used in that intermediate .md file is virtually identical to the markdown used in govspeak, with a few exceptions.
+
+## Setting up your RMarkdown file to use {govspeakr}
+
+{govspeakr} is designed to be used alongside an RMarkdown file, acting directly on the intermediate .md file, and cannot be called inside the RMarkdown file itself. 
+
+To use the ability of govspeakr to convert to govspeak, there are a few steps you need to follow when setting up your Rmarkdown file, all of which take place in the YAML header.
+
+### What is the YAML header?
+
+The YAML header of an RMarkdown file is a section at the top of the file that contains metadata about the document. This metadata includes the title of the document, the author, the date, and the output format. The YAML header is enclosed by three dashes at the top and bottom of the section.
+
+### Setting up the YAML header
+
+To use {govspeakr} to convert your RMarkdown file to govspeak, you need to set the `keep_md` argument to `true` in the YAML header of the RMarkdown document. This tells RMarkdown to keep the intermediate .md file after knitting, which is necessary for {govspeakr} to work. It also keeps the intermediate .svg/.png images created in the report, so you don't need to save these separately.
+
+Note that YAML is tab sensitive, so an example of using the `keep_md` argument in the YAML header would look like this:
+
+```
+---
+title: "My Rmarkdown File"
+output: 
+  html_document:
+    keep_md: true
+---
+```
+
+Because we keep the intermediate .md file, this means that it can often be hard or impossible to output both a nicely formatted version of your publication _and_ the intermediate markdown from the same output. Many people therefore choose to carry out dual ouput; that is, to output both a nicely formatted version of the publication and the intermediate markdown from the same Rmarkdown. This can be achieved by setting up the YAML header as follows:
+
+```
+---
+title: "My Rmarkdown File"
+output: 
+  html_document:
+    keep_md: true
+  word_document:
+    #any other parameters relevant to the word document here
+---
+```
+
+You can choose which format you want to have as your "nice" version, and which you want to be associated with the intermediate markdown file. It is getting more common for people to choose to output a nice HTML version of the publication, and to keep the intermediate markdown file associated with the word output, allowing your HTML output to look very similar to your final Whitehall publisher version. Setting up your YAML to allow this would look like this:
+
+```
+---
+title: "My Rmarkdown File"
+output: 
+  word_document:
+    keep_md: true
+  html_document:
+    #any other parameters relevant to the html document here
+---
+```
+
+Note that the title, date, author etc are set inside Whitehall and _not_ by your YAML header, so you don't need to worry about this looking neat and tidy.
+
+## Rendering multiple outputs
+
+For RMarkdown documents where you have multiple output formats listed in the YAML header, pressing knit will only render the first output format listed. To render both output formats, you will need to use the `rmarkdown::render()` function with the argument `outputs = "all"`. This will render all output formats listed in the YAML header, in the order they are listed in the YAML. The `render()` function should be called inside a separate script file, and not inside the RMarkdown file itself.
+
+An example of how to use the `render()` function to render all output formats listed in the YAML header would look like this:
+
+```{r, eval = FALSE}
+rmarkdown::render("path/to/your/RMarkdown/file.Rmd", output_format = "all")
+```
+
+
+## Converting the .md file to govspeak
+
+Once you have set up your RMarkdown file to keep the intermediate .md file, you can convert this .md file to govspeak using the `convert_rmd()` function from the {govspeakr} package. This function takes the path to the .md file as an argument, and returns the govspeak version of the file as a file called `original_file_name_converted.md`.
+
+The conversion steps carried out when using the `convert_rmd()` function are as follows:
+
+
+* Image tags are converted from standard markdown to govspeak i.e.
+```
+Figure 1
+![](images/image1.png)<!-- -->!
+
+Figure 1
+[Image:image1.png]
+```
+
+The function produces a message to let you know how many image references it has found and converted. If there are no images found, this is fine, the function will still run.
+
+
+* Page breaks are replaced. This feature can be controlled using the "page_break" argument. ```page_break = "line"``` replaces them with a horizontal ruling, while ```page_break = "none"``` just moves the subsequent text onto a new line, and ```page_break = "unchanged"``` makes no replacement.
+
+* The YAML header is removed, as are any code chunks you have set to echo = TRUE. You will be warned if more than one YAML header is found, or if any code chunks are found.
+
+* As GOV.UK cannot accept first-level headers (single #), all hashed headers are increased by one level i.e.
+``` # Title ``` becomes ```## Title```. 
+This functionality can be controlled using the sub_pattern argument. Setting it to TRUE increases all headers by one level. FALSE results in no changes to the headers as written. Passing the argument a vector allows selective changing of specific headers, e.g. ```sub_pattern = c("#", "##")``` would change only first and second level headers.
+
+

@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(mojspeakr)
+library(govspeakr)
 
-test_check("mojspeakr")
+test_check("govspeakr")

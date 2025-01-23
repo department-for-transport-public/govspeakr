@@ -21,9 +21,18 @@ Experimental statistics}
 \item{pre_release_note}{a string, containing  a pre-release note that will
 appear underneath the title in the header text. Defaults to "Pre-release".}
 }
+\value{
+A plain text string which renders as a HTML banner
+}
 \description{
 Add a blue header bar to the top of a HTML pre-release
 containing the stats release details to mimic the appearance of gov.uk
 This should be done for the pre-release only,
 and not for the final statistics publication
+}
+\examples{
+\dontrun{
+add_blue_header("Annual Road Traffic Statistics", stats_status = "Official Statistics")
+}
+
 }

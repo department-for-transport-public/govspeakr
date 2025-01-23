@@ -11,7 +11,14 @@
 #' appear underneath the title in the header text. Defaults to "Pre-release".
 #' @export
 #' @name add_blue_header
+#' @importFrom knitr asis_output
 #' @title Add the blue header bar at the top of a HTML pre-release
+#' @returns A plain text string which renders as a HTML banner
+#' @examples
+#' \dontrun{
+#' add_blue_header("Annual Road Traffic Statistics", stats_status = "Official Statistics")
+#' }
+#'
 
 add_blue_header <- function(header_text,
                             stats_status = "National Statistics",
