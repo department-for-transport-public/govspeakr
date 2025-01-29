@@ -1,7 +1,7 @@
 Package: govspeakr
 Type: Package
 Title: Facilitates Producing Whitehall Publisher-Ready Outputs Using Rmarkdown 
-Version: 1.0.0
+Version: 1.0.1
 Author: Francesca Bryden
 Maintainer: Francesca.Bryden <francesca.bryden@justice.gov.uk>
 Description: Allows preparation of HTML releases for publication on gov.uk

@@ -19,3 +19,13 @@ Adds conditional CTA tags in govspeak only. Displays as text in a box on Whiteha
 as a equivalent style HTML box in the html output if needed,
 and as simple text only in other formats.
 }
+\examples{
+\dontrun{
+##This will display the $CTA tags in the HTML output and nothing in any other format
+callout_box("This is a callout box")
+
+#This will display the $CTA tags in the word output and a nicely CSS-formatted box in the HTML output
+callout_box("This is a callout box", "word")
+}
+
+}
