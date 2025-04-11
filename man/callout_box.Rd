@@ -10,9 +10,22 @@ callout_box(text, format = "html")
 \item{text}{string to publish in a callout box}
 
 \item{format}{string which identifies the outputs you would like the
-callout box tags to appear in. Set to HTML as default.}
+callout box tags to appear in. Set to HTML as default. If HTML is not the chosen format value,
+the callout box will be displayed as a CSS-formatted in the HTML output. All other
+formats which are not the chosen format value will display the callout box as simple text.}
 }
 \description{
-Adds conditional CTA tags in govspeak only. Displays as text in a box in
-govspeak, and as simple text only in other formats.
+Adds conditional CTA tags in govspeak only. Displays as text in a box on Whitehall publisher,
+as a equivalent style HTML box in the html output if needed,
+and as simple text only in other formats.
+}
+\examples{
+\dontrun{
+##This will display the $CTA tags in the HTML output and nothing in any other format
+callout_box("This is a callout box")
+
+#This will display the $CTA tags in the word output and a nicely CSS-formatted box in the HTML output
+callout_box("This is a callout box", "word")
+}
+
 }

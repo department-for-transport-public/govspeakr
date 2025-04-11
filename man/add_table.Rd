@@ -2,13 +2,33 @@
 % Please edit documentation in R/add_table.R
 \name{add_table}
 \alias{add_table}
-\title{Format data in a table suitable for publication}
+\title{Format data in a markdown table suitable for publication, with comma separation on numbers}
 \usage{
-add_table(data)
+add_table(data, format.args = list(big.mark = ","), bold_cols = NULL)
 }
 \arguments{
 \item{data}{dataframe; dataframe of any size to be displayed as a table}
+
+\item{format.args}{additional format arguments to be passed to the table.}
+
+\item{bold_cols}{vector; vector of column names or column positions to be bolded in the table
+Defaults to comma thousands separation}
+}
+\value{
+a markdown formatted table as a string
 }
 \description{
 Add a table in Rmarkdown suitable for publication in govspeak and in word/PDF
+}
+\examples{
+add_table(mtcars)
+##Example with comma formatted values
+add_table(data.frame(datasets::EuStockMarkets))
+##Example with format.args set to null
+add_table(data.frame(datasets::EuStockMarkets), format.args = NULL)
+##Example with bold_cols set to a vector of column names
+add_table(data.frame(datasets::EuStockMarkets), bold_cols = c("DAX", "SMI"))
+##Example with bold_cols set to a vector of column positions
+add_table(data.frame(datasets::EuStockMarkets), bold_cols = c(1, 2))
+
 }
