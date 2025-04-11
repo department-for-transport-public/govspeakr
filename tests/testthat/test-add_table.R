@@ -26,3 +26,32 @@ test_that("add_table works with custom arguments", {
   expect_equal(result_custom, expected_output_custom)
 })
 
+test_that("add_table works with bold_cols as column names", {
+
+  result_bold_cols_names <- add_table(mtcars, bold_cols = c("mpg", "cyl"))
+  mtcars_bold <- mtcars
+
+  mtcars_bold$mpg <- paste0("**", mtcars_bold$mpg, "**")
+  mtcars_bold$cyl <- paste0("**", mtcars_bold$cyl, "**")
+
+  expected_output_bold_cols_names <- knitr::kable(mtcars_bold,
+                                                  format = "markdown",
+                                                  format.args = list(big.mark = ","))
+
+  expect_equal(result_bold_cols_names, expected_output_bold_cols_names)
+})
+
+test_that("add_table works with bold_cols as column positions", {
+
+  result_bold_cols_positions <- add_table(mtcars, bold_cols = c(1, 2))
+
+  mtcars_bold <- mtcars
+  mtcars_bold$mpg <- paste0("**", mtcars_bold$mpg, "**")
+  mtcars_bold$cyl <- paste0("**", mtcars_bold$cyl, "**")
+
+  expected_output_bold_cols_positions <- knitr::kable(mtcars_bold,
+                                                      format = "markdown",
+                                                      format.args = list(big.mark = ","))
+
+  expect_equal(result_bold_cols_positions, expected_output_bold_cols_positions)
+})

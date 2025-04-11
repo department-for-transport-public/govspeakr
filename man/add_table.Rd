@@ -4,12 +4,14 @@
 \alias{add_table}
 \title{Format data in a markdown table suitable for publication, with comma separation on numbers}
 \usage{
-add_table(data, format.args = list(big.mark = ","))
+add_table(data, format.args = list(big.mark = ","), bold_cols = NULL)
 }
 \arguments{
 \item{data}{dataframe; dataframe of any size to be displayed as a table}
 
-\item{format.args}{additional format arguments to be passed to the table.
+\item{format.args}{additional format arguments to be passed to the table.}
+
+\item{bold_cols}{vector; vector of column names or column positions to be bolded in the table
 Defaults to comma thousands separation}
 }
 \value{
@@ -24,5 +26,9 @@ add_table(mtcars)
 add_table(data.frame(datasets::EuStockMarkets))
 ##Example with format.args set to null
 add_table(data.frame(datasets::EuStockMarkets), format.args = NULL)
+##Example with bold_cols set to a vector of column names
+add_table(data.frame(datasets::EuStockMarkets), bold_cols = c("DAX", "SMI"))
+##Example with bold_cols set to a vector of column positions
+add_table(data.frame(datasets::EuStockMarkets), bold_cols = c(1, 2))
 
 }

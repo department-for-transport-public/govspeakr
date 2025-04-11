@@ -49,7 +49,7 @@ The following functions are all designed to be used inside Rmarkdown documents, 
 Allows simple addition of figures which are not generated within the Rmarkdown document. These should preferably be in .svg format, but if they are in .png format they must adhere to the Whitehall publishing size of 960 by 640 pixels. Takes two arguments, the file name and its folder location (defaults to "graphs").
 
 #### add_table() 
-Formats a dataframe of data into a table. This will display correctly in govspeak and other (word and HTML) formats, and allows for text to go over multiple lines. Takes a single argument `data` of the table contents.
+Formats a dataframe of data into a table. This will display correctly in govspeak and other (word and HTML) formats, and allows for text to go over multiple lines. Takes a single mandatory argument `data` of the table contents, and two optional arguments `format.args` and `bold_cols` which allow for further formatting of the table.
 
 #### conditional_publishing_output()
 Aims to make publishing two formats from one RMarkdown document simple. This wrapper allows any output to be conditional and only appear in one of the specified formats e.g. to output table_one in the HTML output only you can use:
