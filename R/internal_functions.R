@@ -5,15 +5,15 @@
 #' @title Generate govdown image references
 generate_image_references <- function(lines) {
 
-  #Split any lines on <-- --> to get one image per line chaps
-  lines <- unlist(strsplit(lines, "<!-- -->"))
-
   #Return a message of how many image references detected
-  message("Detected ", length(grep("!\\[\\]\\(.*\\/(.*)\\)", lines)),
-          " image references")
+  matches <- gregexpr("!\\[\\]\\(.*?/([^\\)]+)\\)", lines)
+  num_images <- sum(sapply(matches,
+                           function(x) ifelse(x[1] == -1, 0, length(x))))
+
+  message("Detected ", num_images, " image references")
 
   ##Sub out markdown format for Whitehall format
-  lines <- gsub("\\!\\[\\]\\(.*\\/(.*)\\)", "[Image:\\1]", lines)
+  lines <- gsub("!\\[\\]\\(.*?/([^\\)]+)\\)", "[Image:\\1]", lines)
 
   return(lines)
 }
